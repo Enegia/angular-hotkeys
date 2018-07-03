@@ -1,7 +1,7 @@
 /*! 
  * angular-hotkeys v1.7.0
  * https://chieffancypants.github.io/angular-hotkeys
- * Copyright (c) 2016 Wes Cruver
+ * Copyright (c) 2018 Wes Cruver
  * License: MIT
  */
 /*
@@ -577,21 +577,34 @@
         };
       }
 
+      function setTemplateTitle(title) {
+        scope.title = title;
+      }
+
+      function setCheatSheetDescription(description) {
+        this.cheatSheetDescription = description;
+        if (scope.hotkeys.length > 0) {
+          scope.hotkeys[0].description = this.cheatSheetDescription;
+        }
+      }
+
       var publicApi = {
-        add                   : _add,
-        del                   : _del,
-        get                   : _get,
-        bindTo                : bindTo,
-        template              : this.template,
-        toggleCheatSheet      : toggleCheatSheet,
-        includeCheatSheet     : this.includeCheatSheet,
-        cheatSheetHotkey      : this.cheatSheetHotkey,
-        cheatSheetDescription : this.cheatSheetDescription,
-        useNgRoute            : this.useNgRoute,
-        purgeHotkeys          : purgeHotkeys,
-        templateTitle         : this.templateTitle,
-        pause                 : pause,
-        unpause               : unpause
+        add                      : _add,
+        del                      : _del,
+        get                      : _get,
+        bindTo                   : bindTo,
+        template                 : this.template,
+        toggleCheatSheet         : toggleCheatSheet,
+        includeCheatSheet        : this.includeCheatSheet,
+        cheatSheetHotkey         : this.cheatSheetHotkey,
+        cheatSheetDescription    : this.cheatSheetDescription,
+        useNgRoute               : this.useNgRoute,
+        purgeHotkeys             : purgeHotkeys,
+        templateTitle            : this.templateTitle,
+        pause                    : pause,
+        unpause                  : unpause,
+        setTemplateTitle         : setTemplateTitle,
+        setCheatSheetDescription : setCheatSheetDescription
       };
 
       return publicApi;
@@ -1050,7 +1063,7 @@
     }
 
     function _belongsTo(element, ancestor) {
-        if (element === document) {
+        if (element === null || element === document) {
             return false;
         }
 
